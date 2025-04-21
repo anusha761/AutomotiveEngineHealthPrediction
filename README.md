@@ -10,8 +10,9 @@
 
 
 ## General Information
-- The project addresses a critical challenge in the automotive industry: identifying degrading engines before failure occurs. This is vital for large fleets, service providers, and vehicle owners aiming to reduce unexpected breakdowns and optimize maintenance schedules.
+- The project addresses a critical challenge in the automotive industry: identifying degrading engines before failure occurs. This is vital for large fleets, service providers, and vehicle owners aiming to reduce unexpected breakdowns and optimize maintenance schedules. 
 - A binary classification model was developed to predict the health condition of automotive engines using key telemetry signals such as engine RPM, fuel pressure, coolant temperature, and friction-related thermal data.
+- The model serves as a blueprint for integrating Machine Learning into automotive diagnostic systems.
 - The process involved thorough data preprocessing, feature selection using p-values and VIF, model evaluation using ROC-AUC (instead of just accuracy), and comparison across different classifiers.
 - Logistic regression was initially used for its interpretability, and XGBoost was later applied to improve prediction performance.
 - The dataset comprises sensor readings and performance indicators for multiple engines, with the target variable indicating whether an engine is in good (1) or bad (0) health.
@@ -26,85 +27,75 @@ Coefficient = –0.4040
 
 - Poor idle control,
 
-Compensatory behavior by the ECU (engine control unit),
+- Compensatory behavior by the ECU (engine control unit),
 
-Or mechanical inefficiencies causing unstable engine behavior. Thus, elevated RPM may serve as a symptom of engine distress, rather than high performance.
+- Or mechanical inefficiencies causing unstable engine behavior.
+
+Thus, highly elevated RPM may serve as a symptom of engine distress, rather than high performance.
 
 2. Fuel Pressure
 Coefficient = +0.2704
 
 Higher fuel pressure is linked to a greater probability of good engine health. This suggests that well-functioning engines maintain consistent and adequate fuel pressure to ensure efficient combustion. Conversely, lower fuel pressure could be symptomatic of:
 
-Fuel pump degradation,
+- Fuel pump degradation,
 
-Injector clogging,
+- Injector clogging,
 
-Or compensation in faulty engines.
+- Overcompensation in faulty engines.
 
-Coolant Pressure
+3. Coolant Pressure
 Coefficient = –0.0548
 
 Higher coolant pressure is slightly associated with lower engine health. This could indicate:
 
-Overheating due to poor coolant flow,
+- Overheating due to poor coolant flow,
 
-Blocked passages or a clogged radiator,
+- Blocked passages or a clogged radiator,
 
-Or pressure buildup from ineffective heat dissipation.
+- Pressure buildup from ineffective heat dissipation.
 
-Lubricant Oil Temperature
+4. Lubricant Oil Temperature
 Coefficient = –0.1662
 
 Higher oil temperatures reduce the likelihood of good engine health. This reflects elevated internal friction, possible inadequate lubrication, or thermal stress — all of which are indicators of engine wear or inefficiency. Healthy engines tend to operate within a stable and safe oil temperature range.
 
-Coolant Temperature
+5. Coolant Temperature
 Coefficient = –0.0523
 
 Increased coolant temperature is mildly associated with lower engine health. While some increase in coolant temperature is normal during engine operation, excessive levels may point to:
 
-Overheating,
+- Overheating,
 
-Thermostat failure,
+- Thermostat failure,
 
-Or clogged coolant flow.
+Clogged coolant flow.
 
 Thus, this variable acts as a subtle risk factor.
 
-Oil Pressure per RPM (Lubricant Oil Pressure / Engine RPM)
+6. Oil Pressure per RPM (Lubricant Oil Pressure / Engine RPM)
 Coefficient = +0.3014
 
 A higher oil pressure per unit of RPM is strongly associated with good engine health. This feature reflects an engine's ability to maintain oil pressure effectively as it operates at higher speeds, suggesting a well-maintained lubrication system and good mechanical integrity. It emerged as one of the most important predictors in the model.
 
 Oil Pressure per RPM was a derived feature. It emerged as a good positive predictor of engine health, indicating that engines capable of sustaining oil pressure across RPMs tend to be in better condition.
 
+
 Protective Indicators (associated with good engine health):
 
-High oil pressure per RPM
+- High oil pressure per RPM
 
-Adequate and stable fuel pressure
+- Adequate and stable fuel pressure
 
 Risk Indicators (associated with poor engine health):
 
-Elevated engine RPM (crossing 1400 rpm)
+- Elevated engine RPM (crossing 1400 rpm)
 
-High lubricant oil temperature (crossing 77 units)
+- High lubricant oil temperature (crossing 77 units)
 
-High coolant temperature and pressure (crossing 80 units and 4 units respectively)
+- High coolant temperature and pressure (crossing 80 units and 4 units respectively)
 
 Note: Units for temperature and pressure were not explicitly defined in the dataset. All thresholds are based on relative trends observed in the data.
-   
-
-2. **Modeling Approach**  
-   - **Logistic Regression** was used as the baseline model for its simplicity and interpretability.  
-   - Feature coefficients aligned with engineering principles, adding credibility to the results.  
-   - The XGBoost** model improved the ROC-AUC score to **0.70**, indicating better classification of engine health status.
-   - Accuracy alone was insufficient due to class imbalance; **ROC-AUC** was used for a balanced assessment.
-
-
-4. **Business Impact**  
-   - Early classification of engine health enables **predictive maintenance**, reducing costly breakdowns.  
-   - The approach supports smarter fleet management, operational efficiency, and enhanced customer satisfaction.  
-   - The model serves as a blueprint for integrating Machine Learning into automotive diagnostic systems.
 
 
 ## Technologies Used
