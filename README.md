@@ -19,14 +19,80 @@
 
 ## Conclusions
 
-1. **Key Features Selected**  
-   Using logistic regression and statistical filtering, the following six features were selected:
-   - Engine RPM: Lower RPM is associated with bad engine health  
-   - Fuel Pressure: Higher pressure indicates stress or inefficiency  
-   - Coolant Pressure: Healthy coolant pressure supports good engine condition  
-   - Coolant Temperature: Warm operating temperatures (not cold) reflect stable performance  
-   - Friction Heat Product: Higher friction and thermal stress correlate with bad health  
-   - Intercept: Baseline health probability when features are at average levels
+1. Engine RPM
+Coefficient = –0.4040
+
+- Higher engine RPM is associated with a lower probability of good engine health. Bad engines in the dataset tend to operate at unusually high RPMs, possibly due to:
+
+- Poor idle control,
+
+Compensatory behavior by the ECU (engine control unit),
+
+Or mechanical inefficiencies causing unstable engine behavior. Thus, elevated RPM may serve as a symptom of engine distress, rather than high performance.
+
+2. Fuel Pressure
+Coefficient = +0.2704
+
+Higher fuel pressure is linked to a greater probability of good engine health. This suggests that well-functioning engines maintain consistent and adequate fuel pressure to ensure efficient combustion. Conversely, lower fuel pressure could be symptomatic of:
+
+Fuel pump degradation,
+
+Injector clogging,
+
+Or compensation in faulty engines.
+
+Coolant Pressure
+Coefficient = –0.0548
+
+Higher coolant pressure is slightly associated with lower engine health. This could indicate:
+
+Overheating due to poor coolant flow,
+
+Blocked passages or a clogged radiator,
+
+Or pressure buildup from ineffective heat dissipation.
+
+Lubricant Oil Temperature
+Coefficient = –0.1662
+
+Higher oil temperatures reduce the likelihood of good engine health. This reflects elevated internal friction, possible inadequate lubrication, or thermal stress — all of which are indicators of engine wear or inefficiency. Healthy engines tend to operate within a stable and safe oil temperature range.
+
+Coolant Temperature
+Coefficient = –0.0523
+
+Increased coolant temperature is mildly associated with lower engine health. While some increase in coolant temperature is normal during engine operation, excessive levels may point to:
+
+Overheating,
+
+Thermostat failure,
+
+Or clogged coolant flow.
+
+Thus, this variable acts as a subtle risk factor.
+
+Oil Pressure per RPM (Lubricant Oil Pressure / Engine RPM)
+Coefficient = +0.3014
+
+A higher oil pressure per unit of RPM is strongly associated with good engine health. This feature reflects an engine's ability to maintain oil pressure effectively as it operates at higher speeds, suggesting a well-maintained lubrication system and good mechanical integrity. It emerged as one of the most important predictors in the model.
+
+Oil Pressure per RPM was a derived feature. It emerged as a good positive predictor of engine health, indicating that engines capable of sustaining oil pressure across RPMs tend to be in better condition.
+
+Protective Indicators (associated with good engine health):
+
+High oil pressure per RPM
+
+Adequate and stable fuel pressure
+
+Risk Indicators (associated with poor engine health):
+
+Elevated engine RPM (crossing 1400 rpm)
+
+High lubricant oil temperature (crossing 77 units)
+
+High coolant temperature and pressure (crossing 80 units and 4 units respectively)
+
+Note: Units for temperature and pressure were not explicitly defined in the dataset. All thresholds are based on relative trends observed in the data.
+   
 
 2. **Modeling Approach**  
    - **Logistic Regression** was used as the baseline model for its simplicity and interpretability.  
