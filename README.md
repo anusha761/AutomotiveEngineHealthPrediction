@@ -69,7 +69,7 @@ Increased coolant temperature is mildly associated with lower engine health. Whi
 
 - Thermostat failure,
 
-Clogged coolant flow.
+- Clogged coolant flow.
 
 Thus, this variable acts as a subtle risk factor.
 
